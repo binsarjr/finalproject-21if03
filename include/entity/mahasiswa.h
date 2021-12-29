@@ -3,5 +3,5 @@ using namespace std;
 
 struct Mahasiswa
 {
-    string npm, nama;
+    string npm, nama, kelas;
 };

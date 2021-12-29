@@ -1,10 +1,19 @@
 #include <fstream>
-
+#include <algorithm>
 namespace MahasiswaRepository
 {
     string filename = "database/mahasiswa.csv";
+    bool compareByNpm(const Mahasiswa &a, const Mahasiswa &b)
+    {
+        return a.npm < b.npm;
+    }
+    vector<Mahasiswa> sortMahasiswa(vector<Mahasiswa> mhs)
+    {
+        std::sort(mhs.begin(), mhs.end(), compareByNpm);
+        return mhs;
+    }
 
-    vector<Mahasiswa> FindAll()
+    vector<Mahasiswa> FindAll(string kelas = "")
     {
         vector<Mahasiswa> mhsAll;
         fstream fin(filename, ios::in);
@@ -13,25 +22,18 @@ namespace MahasiswaRepository
         while (getline(fin, line))
         {
             Mahasiswa mhs;
-            vector<string> v = split(line, ",");
-
-            int col = 1;
-            for (auto item : v)
+            vector<string> items = split(line, ",");
+            mhs.npm = items.at(0);
+            mhs.nama = items.at(1);
+            mhs.kelas = items.at(2);
+            if (kelas != "" && kelas != mhs.kelas)
             {
-                switch (col)
-                {
-                case 1:
-                    mhs.npm = item;
-                    break;
-                case 2:
-                    mhs.nama = item;
-                    break;
-                }
-                col++;
+                continue;
             }
             mhsAll.push_back(mhs);
         }
         fin.close();
+        mhsAll = sortMahasiswa(mhsAll);
         return mhsAll;
     }
 
@@ -43,40 +45,14 @@ namespace MahasiswaRepository
         while (getline(fin, line))
         {
 
-            vector<string> v = split(line, ",");
+            vector<string> items = split(line, ",");
 
-            bool exists = false;
-            int col = 1;
-            for (auto item : v)
+            if (items.at(0) == npm)
             {
-                if (col == 1)
-                {
-                    if (npm == item)
-                    {
-                        exists = true;
-                        break;
-                    }
-                }
-                col++;
-            }
-
-            if (exists)
-            {
+                mhs.npm = items.at(0);
+                mhs.nama = items.at(1);
+                mhs.kelas = items.at(2);
                 fin.close();
-                col = 1;
-                for (auto item : v)
-                {
-                    switch (col)
-                    {
-                    case 1:
-                        mhs.npm = item;
-                        break;
-                    case 2:
-                        mhs.nama = item;
-                        break;
-                    }
-                    col++;
-                }
             }
         }
         if (fin.is_open())
@@ -87,7 +63,7 @@ namespace MahasiswaRepository
         return mhs;
     }
 
-    void Create(Mahasiswa *mhs, int size)
+    void Create(vector<Mahasiswa> mahasiswa)
     {
         fstream fin(filename, ios::in);
         string firstLine;
@@ -96,16 +72,16 @@ namespace MahasiswaRepository
         fstream fout(filename, ios::out | ios::app);
         if (firstLine == "")
         {
-            fout << "npm,nama\n";
+            fout << "npm,nama,kelas\n";
         }
-        for (int i = 0; i < size; i++)
+        for (auto mhs : mahasiswa)
         {
-            if (Find(mhs[i].npm).npm != "")
+            if (Find(mhs.npm).npm != "")
             {
-                cout << "Mahasiswa dengan npm " << mhs[i].npm << " sudah digunakan" << endl;
+                cout << "Mahasiswa dengan npm " << mhs.npm << " sudah digunakan" << endl;
                 continue;
             }
-            fout << mhs[i].npm << "," << mhs[i].nama << "\n";
+            fout << mhs.npm << "," << mhs.nama << "," << capitalizeString(mhs.kelas) << "\n";
         }
         fout.close();
     }

@@ -1,4 +1,13 @@
 #include <iostream>
+#include <algorithm>
+#include <string>
+
+using std::cin;
+using std::cout;
+using std::endl;
+using std::string;
+using std::toupper;
+using std::transform;
 #include <sstream>
 #include <vector>
 
@@ -19,4 +28,12 @@ vector<string> split(string s, string delimiter)
 
     res.push_back(s.substr(pos_start));
     return res;
+}
+
+string capitalizeString(string s)
+{
+    transform(s.begin(), s.end(), s.begin(),
+              [](unsigned char c)
+              { return toupper(c); });
+    return s;
 }
