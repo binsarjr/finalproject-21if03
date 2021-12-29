@@ -4,6 +4,37 @@ namespace MahasiswaRepository
 {
     string filename = "database/mahasiswa.csv";
 
+    vector<Mahasiswa> FindAll()
+    {
+        vector<Mahasiswa> mhsAll;
+        fstream fin(filename, ios::in);
+        string line;
+        getline(fin, line); // skip firstline
+        while (getline(fin, line))
+        {
+            Mahasiswa mhs;
+            vector<string> v = split(line, ",");
+
+            int col = 1;
+            for (auto item : v)
+            {
+                switch (col)
+                {
+                case 1:
+                    mhs.npm = item;
+                    break;
+                case 2:
+                    mhs.nama = item;
+                    break;
+                }
+                col++;
+            }
+            mhsAll.push_back(mhs);
+        }
+        fin.close();
+        return mhsAll;
+    }
+
     Mahasiswa Find(string npm)
     {
         Mahasiswa mhs;
