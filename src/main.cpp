@@ -14,11 +14,19 @@
  * @copyright Copyright (c) 2021
  *
  */
+
+#ifdef _WIN32 || defined(_WIN32) || defined(WIN32)
+#define OS_Windows 1
+#else
+#define OS_Windows 0
+#endif
+
 #include <iostream>
 #include <iomanip>
 #include <../lib/VariadicTable.h>
 #include <../lib/files.h>
 #include <../lib/string.h>
+#include <../lib/io.h>
 #include <../include/entity/mahasiswa.h>
 #include <../include/repository/mahasiswa.h>
 #include <../include/services/mahasiswa.h>
