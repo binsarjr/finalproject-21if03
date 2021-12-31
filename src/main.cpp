@@ -1,50 +1,54 @@
+/**
+ * @file main.cpp
+ * @author Ali Akbar A.Rahim (21.11.3987)
+ * @author Andri Pebriyanto (21.11.3971)
+ * @author Binsar Dwi Jasuma (21.11.4002)
+ * @author Eka Marlina Kemala Sari (21.11.4010)
+ * @author Rivalsan putra Wattimena (21.11.4016)
+ * @brief Sistem Informasi Akademik sederhana
+ * @version 0.1
+ * @date 2021-12-29
+ *
+ * Aplikasi AMIKOM menghitung IPK sederhana
+ *
+ * @copyright Copyright (c) 2021
+ *
+ */
 #include <iostream>
+#include <iomanip>
 #include <../lib/VariadicTable.h>
 #include <../lib/files.h>
 #include <../lib/string.h>
 #include <../include/entity/mahasiswa.h>
 #include <../include/repository/mahasiswa.h>
+#include <../include/services/mahasiswa.h>
+#include <../include/infrastructure/menu.h>
 
 using namespace std;
 
-void showAllMahasiswa(string kelas = "")
-{
-
-    VariadicTable<int, string, string, string> vt({"No.", "NPM", "Nama", "Kelas"}, 4);
-
-    vt.setColumnFormat({VariadicTableColumnFormat::AUTO,
-                        VariadicTableColumnFormat::FIXED,
-                        VariadicTableColumnFormat::AUTO,
-                        VariadicTableColumnFormat::PERCENT});
-    vt.setColumnPrecision({1, 3, 1, 2});
-    vector<Mahasiswa> mahasiswa = MahasiswaRepository::FindAll(kelas);
-    int i = 1;
-    for (auto mhs : mahasiswa)
-    {
-        vt.addRow(i++, mhs.npm, mhs.nama, mhs.kelas);
-    }
-    vt.print(std::cout);
-}
-
 int main()
 {
+    Menu::welcome();
+    cout << "\n\n\n";
+    Menu::display();
+    // Menu::Level1();
 
-    vector<Mahasiswa> mahasiswa;
-    mahasiswa.push_back({"21.11.4004", "Saipudin", "21IF04"});
-    mahasiswa.push_back({"21.11.4002", "Binsar Dwi Jasuma", "21IF03"});
-    mahasiswa.push_back({"21.11.4003", "Asep", "21if03"});
-    MahasiswaRepository::Create(mahasiswa);
-    showAllMahasiswa();
+    // vector<Mahasiswa> mahasiswa;
+    // mahasiswa.push_back({"21.11.4004", "Saipudin", "21IF04"});
+    // mahasiswa.push_back({"21.11.4002", "Binsar Dwi Jasuma", "21IF03"});
+    // mahasiswa.push_back({"21.11.4003", "Asep", "21if03"});
+    // MahasiswaRepository::Create(mahasiswa);
+    // MahasiswaService::Find();
 
-    string npm = mahasiswa[0].npm;
-    cout << "Cari mahasiswa dengan npm " << npm << endl;
+    // string npm = mahasiswa[0].npm;
+    // cout << "Cari mahasiswa dengan npm " << npm << endl;
 
-    Mahasiswa mhsSatu = MahasiswaRepository::Find(npm);
-    cout << "Mahasiswa ditemukan: " << mhsSatu.npm << "-" << mhsSatu.nama << endl;
+    // Mahasiswa mhsSatu = MahasiswaRepository::FindOneByNpm(npm);
+    // cout << "Mahasiswa ditemukan: " << mhsSatu.npm << "-" << mhsSatu.nama << endl;
 
-    cout << "Hapus mahasiswa dengan npm " << npm << endl;
-    MahasiswaRepository::Delete(npm);
-    cout << "Mahasiswa dengan npm " << npm << " telah dihapus" << endl;
+    // cout << "Hapus mahasiswa dengan npm " << npm << endl;
+    // MahasiswaRepository::Delete(npm);
+    // cout << "Mahasiswa dengan npm " << npm << " telah dihapus" << endl;
 
     return 0;
 }
