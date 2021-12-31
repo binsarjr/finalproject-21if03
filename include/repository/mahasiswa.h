@@ -63,7 +63,7 @@ namespace MahasiswaRepository
         return mhs;
     }
 
-    void Create(vector<Mahasiswa> mahasiswa)
+    bool Create(Mahasiswa mahasiswa)
     {
         fstream fin(filename, ios::in);
         string firstLine;
@@ -74,16 +74,21 @@ namespace MahasiswaRepository
         {
             fout << "npm,nama,kelas\n";
         }
+        if (FindOneByNpm(mahasiswa.npm).npm != "")
+        {
+            return false;
+        }
+        fout << mahasiswa.npm << "," << mahasiswa.nama << "," << capitalizeString(mahasiswa.kelas) << "\n";
+        fout.close();
+        return true;
+    }
+
+    void CreateMany(vector<Mahasiswa> mahasiswa)
+    {
         for (auto mhs : mahasiswa)
         {
-            if (FindOneByNpm(mhs.npm).npm != "")
-            {
-                cout << "Mahasiswa dengan npm " << mhs.npm << " sudah digunakan" << endl;
-                continue;
-            }
-            fout << mhs.npm << "," << mhs.nama << "," << capitalizeString(mhs.kelas) << "\n";
+            Create(mhs);
         }
-        fout.close();
     }
 
     void Delete(string npm)

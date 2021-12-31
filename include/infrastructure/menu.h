@@ -83,7 +83,7 @@ namespace Menu
         cout << "\n\n";
     }
 
-    void pilih(string text = "Pilih> ")
+    void pilih(string text)
     {
     pilih:
         cout << text;
@@ -103,7 +103,7 @@ namespace Menu
         kotakPrinting(printWidth(4) + "Daftar Menu" + printWidth(4));
         print({"Manajemen Mahasiswa", "Manajemen Mata Kuliah", "Hitung IPK", "Laporan ipk dll(optional)", "", "", "99"});
 
-        pilih();
+        pilih("[Menu] pilih: ");
 
         switch (pilihan)
         {
@@ -112,17 +112,21 @@ namespace Menu
             kotakPrinting("Manajemen Data Mahasiswa");
             print({"List Mahasiswa", "Tambah Mahasiswa", "Hapus Mahasiswa", "", "", "0", "99"});
 
-            pilih();
+            pilih("[Mahasiswa] pilih: ");
 
             switch (pilihan)
             {
             case 1:
-                MahasiswaService::Find();
-                goto menu_mahasiswa;
+                clear();
                 break;
             case 2:
+                kotakPrinting("Tambah Mahasiswa");
+                MahasiswaService::Create();
+
                 break;
             case 3:
+                kotakPrinting("Hapus Mahasiswa");
+                MahasiswaService::Delete();
                 break;
             case 0:
                 goto daftar_menu;
@@ -130,16 +134,17 @@ namespace Menu
 
             default:
                 exitIfNeeded();
-                goto menu_mahasiswa;
                 break;
             }
+            enter(2);
+            goto menu_mahasiswa;
             break;
         case 2:
         menu_matkul:
             kotakPrinting("Manajemen Data Mata Kuliah");
             print({"List Mata Kuliah", "Tambah Mata Kuliah", "Hapus Mata Kuliah", "", "", "0", "99"});
 
-            pilih();
+            pilih("[MataKuliah] pilih: ");
 
             switch (pilihan)
             {

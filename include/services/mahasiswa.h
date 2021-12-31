@@ -1,3 +1,5 @@
+
+
 namespace MahasiswaService
 {
     void Find(string kelas = "")
@@ -16,5 +18,27 @@ namespace MahasiswaService
             vt.addRow(i++, mhs.npm, mhs.nama, mhs.kelas);
         }
         vt.print(std::cout);
+    }
+
+    void Create()
+    {
+        Mahasiswa mahasiswa;
+
+        input("NPM       : ", mahasiswa.npm, true);
+        input("Nama      : ", mahasiswa.nama);
+        input("Kode Kelas: ", mahasiswa.kelas);
+
+        if (!MahasiswaRepository::Create(mahasiswa))
+        {
+            cout << "\nMahasiswa dengan npm " + mahasiswa.npm + " sudah ada" << endl;
+        }
+    }
+
+    void Delete()
+    {
+        string npm;
+        input("NPM : ", npm, true);
+        MahasiswaRepository::Delete(npm);
+        cout << "Mahasiswa dengan NPM " + npm + " telah dihapus" << endl;
     }
 }
