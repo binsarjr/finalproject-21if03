@@ -5,3 +5,8 @@ struct Mahasiswa
 {
     string npm, nama, kelas;
 };
+
+struct MahasiswaPayload
+{
+    string kelas;
+};

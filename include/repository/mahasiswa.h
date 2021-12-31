@@ -13,7 +13,7 @@ namespace MahasiswaRepository
         return mhs;
     }
 
-    vector<Mahasiswa> FindAll(string kelas = "")
+    vector<Mahasiswa> Find(string kelas = "")
     {
         vector<Mahasiswa> mhsAll;
         fstream fin(filename, ios::in);
@@ -37,7 +37,7 @@ namespace MahasiswaRepository
         return mhsAll;
     }
 
-    Mahasiswa Find(string npm)
+    Mahasiswa FindOneByNpm(string npm)
     {
         Mahasiswa mhs;
         fstream fin(filename, ios::in);
@@ -76,7 +76,7 @@ namespace MahasiswaRepository
         }
         for (auto mhs : mahasiswa)
         {
-            if (Find(mhs.npm).npm != "")
+            if (FindOneByNpm(mhs.npm).npm != "")
             {
                 cout << "Mahasiswa dengan npm " << mhs.npm << " sudah digunakan" << endl;
                 continue;
