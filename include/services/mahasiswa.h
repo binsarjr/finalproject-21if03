@@ -1,6 +1,6 @@
 
 
-namespace MahasiswaEntityService
+namespace MahasiswaService
 {
     void Find(string kelas = "")
     {
