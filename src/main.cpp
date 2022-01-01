@@ -33,14 +33,16 @@
 #include <../include/entity/mahasiswa.h>
 #include <../include/entity/mataKuliah.h>
 #include <../include/repository/mahasiswa.h>
+#include <../include/repository/mataKuliah.h>
 #include <../include/services/mahasiswa.h>
+#include <../include/services/mataKuliah.h>
 #include <../include/infrastructure/menu.h>
 
 using namespace std;
 
 int main()
 {
-    Menu::kotakPrinting("SELAMAT DATANG DI APLIKASI AMIKOM");
+    kotakPrinting("SELAMAT DATANG DI APLIKASI AMIKOM");
     enter(3);
     Menu::display();
 

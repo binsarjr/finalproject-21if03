@@ -1,8 +1,4 @@
-#include <iostream>
-
-using namespace std;
-
-struct MataKuliah
+struct MataKuliahEntity
 {
-    string nama, kodeMatkul;
+    string mataKuliah, kodeMatkul, dosenPengampu;
 };

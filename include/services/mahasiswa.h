@@ -6,18 +6,26 @@ namespace MahasiswaService
     {
         VariadicTable<int, string, string, string> vt({"No.", "NPM", "Nama", "Kelas"}, 4);
 
-        vt.setColumnFormat({VariadicTableColumnFormat::AUTO,
-                            VariadicTableColumnFormat::FIXED,
-                            VariadicTableColumnFormat::AUTO,
-                            VariadicTableColumnFormat::PERCENT});
-        vt.setColumnPrecision({1, 3, 1, 2});
         vector<MahasiswaEntity> mahasiswa = MahasiswaRepository::Find(kelas);
         int i = 1;
         for (auto mhs : mahasiswa)
         {
             vt.addRow(i++, mhs.npm, mhs.nama, mhs.kelas);
         }
-        vt.print(std::cout);
+        if (i > 1)
+        {
+
+            vt.setColumnFormat({VariadicTableColumnFormat::AUTO,
+                                VariadicTableColumnFormat::FIXED,
+                                VariadicTableColumnFormat::AUTO,
+                                VariadicTableColumnFormat::PERCENT});
+            vt.setColumnPrecision({1, 3, 1, 2});
+            vt.print(std::cout);
+        }
+        else
+        {
+            kotakPrinting("Data Mahasiswa Kosong");
+        }
     }
 
     void Create()
@@ -28,8 +36,7 @@ namespace MahasiswaService
         input("Nama      : ", mahasiswa.nama);
         input("Kode Kelas: ", mahasiswa.kelas);
 
-        string color;
-        string msg = "\nMahasiswaEntity dengan npm " + mahasiswa.npm;
+        string msg = "\nMahasiswa dengan npm " + mahasiswa.npm;
         if (MahasiswaRepository::Create(mahasiswa))
         {
 
@@ -50,6 +57,6 @@ namespace MahasiswaService
         string npm;
         input("NPM : ", npm, true);
         MahasiswaRepository::Delete(npm);
-        cout << "\nMahasiswaEntity dengan NPM " + npm + " telah dihapus" << endl;
+        cout << "\nMahasiswa dengan NPM " + npm + " telah dihapus" << endl;
     }
 }
