@@ -1,7 +1,4 @@
-#include <iostream>
-using namespace std;
-
-struct Mahasiswa
+struct MahasiswaEntity
 {
     string npm, nama, kelas;
 };

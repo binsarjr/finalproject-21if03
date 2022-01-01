@@ -1,6 +1,6 @@
 
 
-namespace MahasiswaService
+namespace MahasiswaEntityService
 {
     void Find(string kelas = "")
     {
@@ -11,7 +11,7 @@ namespace MahasiswaService
                             VariadicTableColumnFormat::AUTO,
                             VariadicTableColumnFormat::PERCENT});
         vt.setColumnPrecision({1, 3, 1, 2});
-        vector<Mahasiswa> mahasiswa = MahasiswaRepository::Find(kelas);
+        vector<MahasiswaEntity> mahasiswa = MahasiswaRepository::Find(kelas);
         int i = 1;
         for (auto mhs : mahasiswa)
         {
@@ -22,16 +22,27 @@ namespace MahasiswaService
 
     void Create()
     {
-        Mahasiswa mahasiswa;
+        MahasiswaEntity mahasiswa;
 
         input("NPM       : ", mahasiswa.npm, true);
         input("Nama      : ", mahasiswa.nama);
         input("Kode Kelas: ", mahasiswa.kelas);
 
-        if (!MahasiswaRepository::Create(mahasiswa))
+        string color;
+        string msg = "\nMahasiswaEntity dengan npm " + mahasiswa.npm;
+        if (MahasiswaRepository::Create(mahasiswa))
         {
-            cout << "\nMahasiswa dengan npm " + mahasiswa.npm + " sudah ada" << endl;
+
+            msg += " telah tersimpan";
         }
+        else
+        {
+
+            msg += " sudah ada";
+        }
+
+        cout << msg << RESET;
+        enter(1);
     }
 
     void Delete()
@@ -39,6 +50,6 @@ namespace MahasiswaService
         string npm;
         input("NPM : ", npm, true);
         MahasiswaRepository::Delete(npm);
-        cout << "Mahasiswa dengan NPM " + npm + " telah dihapus" << endl;
+        cout << "\nMahasiswaEntity dengan NPM " + npm + " telah dihapus" << endl;
     }
 }

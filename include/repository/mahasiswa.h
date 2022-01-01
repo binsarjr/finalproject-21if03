@@ -3,25 +3,25 @@
 namespace MahasiswaRepository
 {
     string filename = "database/mahasiswa.csv";
-    bool compareByNpm(const Mahasiswa &a, const Mahasiswa &b)
+    bool compareByNpm(const MahasiswaEntity &a, const MahasiswaEntity &b)
     {
         return a.npm < b.npm;
     }
-    vector<Mahasiswa> sortMahasiswa(vector<Mahasiswa> mhs)
+    vector<MahasiswaEntity> sortMahasiswaEntity(vector<MahasiswaEntity> mhs)
     {
         std::sort(mhs.begin(), mhs.end(), compareByNpm);
         return mhs;
     }
 
-    vector<Mahasiswa> Find(string kelas = "")
+    vector<MahasiswaEntity> Find(string kelas = "")
     {
-        vector<Mahasiswa> mhsAll;
+        vector<MahasiswaEntity> mhsAll;
         fstream fin(filename, ios::in);
         string line;
         getline(fin, line); // skip firstline
         while (getline(fin, line))
         {
-            Mahasiswa mhs;
+            MahasiswaEntity mhs;
             vector<string> items = split(line, ",");
             mhs.npm = items.at(0);
             mhs.nama = items.at(1);
@@ -33,13 +33,13 @@ namespace MahasiswaRepository
             mhsAll.push_back(mhs);
         }
         fin.close();
-        mhsAll = sortMahasiswa(mhsAll);
+        mhsAll = sortMahasiswaEntity(mhsAll);
         return mhsAll;
     }
 
-    Mahasiswa FindOneByNpm(string npm)
+    MahasiswaEntity FindOneByNpm(string npm)
     {
-        Mahasiswa mhs;
+        MahasiswaEntity mhs;
         fstream fin(filename, ios::in);
         string line;
         while (getline(fin, line))
@@ -63,7 +63,7 @@ namespace MahasiswaRepository
         return mhs;
     }
 
-    bool Create(Mahasiswa mahasiswa)
+    bool Create(MahasiswaEntity mahasiswa)
     {
         fstream fin(filename, ios::in);
         string firstLine;
@@ -83,7 +83,7 @@ namespace MahasiswaRepository
         return true;
     }
 
-    void CreateMany(vector<Mahasiswa> mahasiswa)
+    void CreateMany(vector<MahasiswaEntity> mahasiswa)
     {
         for (auto mhs : mahasiswa)
         {

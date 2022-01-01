@@ -39,15 +39,13 @@ namespace Menu
             }
         }
     }
-    void welcome()
-    {
-        kotakPrinting("SELAMAT DATANG DI APLIKASI AMIKOM");
-    }
+
     void exitIfNeeded()
     {
         if (pilihan == 99)
         {
-            cout << "selamat tinggal" << endl;
+            clear();
+            kotakPrinting("SELAMAT TINGGAL");
             exit(1);
         }
     }
@@ -55,7 +53,7 @@ namespace Menu
     void print(vector<string> data)
     {
         int i = 1;
-        cout << "\n\n";
+        enter(2);
 
         for (auto menu : data)
         {
@@ -80,7 +78,7 @@ namespace Menu
                  << " " << menu << endl;
             i++;
         }
-        cout << "\n\n";
+        enter(2);
     }
 
     void pilih(string text)
@@ -118,11 +116,12 @@ namespace Menu
             {
             case 1:
                 clear();
+                MahasiswaService::Find();
                 break;
             case 2:
                 kotakPrinting("Tambah Mahasiswa");
                 MahasiswaService::Create();
-
+                enter(2);
                 break;
             case 3:
                 kotakPrinting("Hapus Mahasiswa");
@@ -138,6 +137,7 @@ namespace Menu
             }
             enter(2);
             goto menu_mahasiswa;
+
             break;
         case 2:
         menu_matkul:
