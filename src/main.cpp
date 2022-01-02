@@ -17,10 +17,8 @@
 
 #if defined(_WIN32) || defined(WIN32)
 #define OS_Windows 1
-#include <Windows.h>
 #else
 #define OS_Windows 0
-#include <unistd.h>
 #endif
 
 #include <iostream>
