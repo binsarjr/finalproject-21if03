@@ -47,7 +47,7 @@ namespace MataKuliahService
             msg += " sudah ada";
         }
 
-        cout << msg << RESET;
+        cout << msg;
         enter(1);
     }
 

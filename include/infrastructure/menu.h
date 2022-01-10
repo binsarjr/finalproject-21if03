@@ -85,7 +85,6 @@ namespace Menu
             case 2:
                 kotakPrinting("Tambah Mahasiswa");
                 MahasiswaService::Create();
-                enter(2);
                 break;
             case 3:
                 kotakPrinting("Hapus Mahasiswa");
@@ -119,7 +118,6 @@ namespace Menu
             case 2:
                 kotakPrinting("Tambah Mata Kuliah");
                 MataKuliahService::Create();
-                enter(2);
                 break;
             case 3:
                 kotakPrinting("Hapus Mata Kuliah");

@@ -48,7 +48,7 @@ namespace MahasiswaService
             msg += " sudah ada";
         }
 
-        cout << msg << RESET;
+        cout << msg;
         enter(1);
     }
 

@@ -15,7 +15,7 @@
  *
  */
 
-#if defined(_WIN32) || defined(WIN32)
+#ifdef _WIN32 || WIN32
 #define OS_Windows 1
 #else
 #define OS_Windows 0
@@ -27,7 +27,6 @@
 #include <../lib/files.h>
 #include <../lib/string.h>
 #include <../lib/io.h>
-#include <../lib/color.h>
 #include <../include/entity/mahasiswa.h>
 #include <../include/entity/mataKuliah.h>
 #include <../include/repository/mahasiswa.h>

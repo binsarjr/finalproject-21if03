@@ -2,7 +2,9 @@
 #include <algorithm>
 namespace MahasiswaRepository
 {
-    string filename = "database/mahasiswa.csv";
+    const string SEPARATOR = "\t";
+
+    string filename = "database/mahasiswa.tsv";
     bool compareByNpm(const MahasiswaEntity &a, const MahasiswaEntity &b)
     {
         return a.npm < b.npm;
@@ -22,7 +24,7 @@ namespace MahasiswaRepository
         while (getline(fin, line))
         {
             MahasiswaEntity mhs;
-            vector<string> items = split(line, ",");
+            vector<string> items = split(line, SEPARATOR);
             mhs.npm = items.at(0);
             mhs.nama = items.at(1);
             mhs.kelas = items.at(2);
@@ -45,7 +47,7 @@ namespace MahasiswaRepository
         while (getline(fin, line))
         {
 
-            vector<string> items = split(line, ",");
+            vector<string> items = split(line, SEPARATOR);
 
             if (items.at(0) == npm)
             {
@@ -53,6 +55,7 @@ namespace MahasiswaRepository
                 mhs.nama = items.at(1);
                 mhs.kelas = items.at(2);
                 fin.close();
+                break;
             }
         }
         if (fin.is_open())
@@ -72,13 +75,14 @@ namespace MahasiswaRepository
         fstream fout(filename, ios::out | ios::app);
         if (firstLine == "")
         {
-            fout << "npm,nama,kelas\n";
+            fout << "NPM" << SEPARATOR << "Nama" << SEPARATOR << "Kelas"
+                 << "\n";
         }
         if (FindOneByNpm(mahasiswa.npm).npm != "")
         {
             return false;
         }
-        fout << mahasiswa.npm << "," << mahasiswa.nama << "," << capitalizeString(mahasiswa.kelas) << "\n";
+        fout << mahasiswa.npm << SEPARATOR << mahasiswa.nama << SEPARATOR << capitalizeString(mahasiswa.kelas) << "\n";
         fout.close();
         return true;
     }
@@ -104,7 +108,7 @@ namespace MahasiswaRepository
             if (i == 1)
                 continue;
 
-            if (line.find(npm + ",") != string::npos)
+            if (line.find(npm + SEPARATOR) != string::npos)
             {
                 delete_line(filename.c_str(), i);
             }

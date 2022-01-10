@@ -3,7 +3,8 @@
 
 namespace MataKuliahRepository
 {
-    string filename = "database/mataKuliah.csv";
+    const string SEPARATOR = "\t";
+    string filename = "database/mataKuliah.tsv";
     bool compareByKodeMatkul(const MataKuliahEntity &a, const MataKuliahEntity &b)
     {
         return a.kodeMatkul < b.kodeMatkul;
@@ -23,7 +24,7 @@ namespace MataKuliahRepository
         while (getline(fin, line))
         {
             MataKuliahEntity matkul;
-            vector<string> items = split(line, ",");
+            vector<string> items = split(line, SEPARATOR);
             matkul.kodeMatkul = items.at(0);
             matkul.mataKuliah = items.at(1);
             matkul.dosenPengampu = items.at(2);
@@ -43,7 +44,7 @@ namespace MataKuliahRepository
         while (getline(fin, line))
         {
 
-            vector<string> items = split(line, ",");
+            vector<string> items = split(line, SEPARATOR);
 
             if (items.at(0) == kodeMatkul)
             {
@@ -70,13 +71,14 @@ namespace MataKuliahRepository
         fstream fout(filename, ios::out | ios::app);
         if (firstLine == "")
         {
-            fout << "kode mata kuliah,mata kuliah,dosen pengampu\n";
+            fout << "Kode Matkul" << SEPARATOR << "Mata Kuliah" << SEPARATOR << "Dosen Pengampu"
+                 << "\n";
         }
         if (FindOneByKodeMatkul(mahasiswa.kodeMatkul).kodeMatkul != "")
         {
             return false;
         }
-        fout << mahasiswa.kodeMatkul << "," << mahasiswa.mataKuliah << "," << mahasiswa.dosenPengampu << "\n";
+        fout << mahasiswa.kodeMatkul << SEPARATOR << mahasiswa.mataKuliah << SEPARATOR << mahasiswa.dosenPengampu << "\n";
         fout.close();
         return true;
     }
@@ -102,7 +104,7 @@ namespace MataKuliahRepository
             if (i == 1)
                 continue;
 
-            if (line.find(kodeMatkul + ",") != string::npos)
+            if (line.find(kodeMatkul + SEPARATOR) != string::npos)
             {
                 delete_line(filename.c_str(), i);
             }
