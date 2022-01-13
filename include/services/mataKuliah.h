@@ -31,7 +31,7 @@ namespace MataKuliahService
     {
         MataKuliahEntity matkul;
 
-        input("Kode Matkul    : ", matkul.kodeMatkul, true);
+        input("Kode Matkul    : ", matkul.kodeMatkul, true, true);
         input("Mata Kuliah    : ", matkul.mataKuliah);
         input("Dosen Pengampu : ", matkul.dosenPengampu);
 
@@ -54,7 +54,7 @@ namespace MataKuliahService
     void Delete()
     {
         string kodeMatkul;
-        input("Kode Matkul : ", kodeMatkul, true);
+        input("Kode Matkul : ", kodeMatkul, true, true);
         MataKuliahRepository::Delete(kodeMatkul);
         cout << "\nMata kuliah dengan kode matkul " + kodeMatkul + " telah dihapus" << endl;
     }

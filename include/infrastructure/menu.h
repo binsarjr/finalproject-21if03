@@ -63,7 +63,7 @@ namespace Menu
     {
     daftar_menu:
         kotakPrinting(printWidth(4) + "Daftar Menu" + printWidth(4));
-        print({"Manajemen Mahasiswa", "Manajemen Mata Kuliah", "Hitung IPK", "Laporan ipk dll(optional)", "", "", "99"});
+        print({"Manajemen Mahasiswa", "Manajemen Mata Kuliah", "Hitung IPK", "Kosongkan rekapan IPK", "", "", "99"});
 
         pilih("[Menu] pilih: ");
 
@@ -135,12 +135,23 @@ namespace Menu
             goto menu_matkul;
 
             break;
+        case 3:
+            clear();
+
+            HitungIPK::display();
+            enter(2);
+            break;
+        case 4:
+            enter(2);
+            pressEnter2Continue();
+            HitungIPKRepository::DeleteAll();
+            break;
 
         default:
             exitIfNeeded();
-            goto daftar_menu;
             break;
         }
+        goto daftar_menu;
     }
 
 }

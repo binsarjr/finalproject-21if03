@@ -32,7 +32,7 @@ namespace MahasiswaService
     {
         MahasiswaEntity mahasiswa;
 
-        input("NPM       : ", mahasiswa.npm, true);
+        input("NPM       : ", mahasiswa.npm, true, true);
         input("Nama      : ", mahasiswa.nama);
         input("Kode Kelas: ", mahasiswa.kelas);
 
@@ -55,7 +55,7 @@ namespace MahasiswaService
     void Delete()
     {
         string npm;
-        input("NPM : ", npm, true);
+        input("NPM : ", npm, true, true);
         MahasiswaRepository::Delete(npm);
         cout << "\nMahasiswa dengan NPM " + npm + " telah dihapus" << endl;
     }

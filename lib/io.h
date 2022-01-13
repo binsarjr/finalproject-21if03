@@ -1,4 +1,12 @@
-
+void pressEnter2Continue(string text = "Press Enter to Continue")
+{
+    cout << "\n\n"
+         << text;
+    cin.ignore(std::numeric_limits<streamsize>::max(), '\n');
+    char temp = 'x';
+    while (temp != '\n')
+        cin.get(temp);
+}
 
 string printWidth(int padding)
 {
@@ -38,15 +46,17 @@ void kotakPrinting(string text)
 }
 
 template <typename T = string>
-void input(string text, T &data, bool clearIgnore = false)
+void input(string text, T &data, bool clear = false, bool ignore = false)
 {
-    if (clearIgnore)
-    {
-        cin.clear();
-        cin.ignore();
-    }
     cout << text;
     getline(cin, data);
+
+    if (clear)
+
+        cin.clear();
+
+    if (ignore)
+        cin.ignore();
 }
 
 void enter(int size)

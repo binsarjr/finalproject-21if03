@@ -21,6 +21,7 @@ namespace MataKuliahRepository
         fstream fin(filename, ios::in);
         string line;
         getline(fin, line); // skip firstline
+
         while (getline(fin, line))
         {
             MataKuliahEntity matkul;
