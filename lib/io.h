@@ -48,15 +48,13 @@ void kotakPrinting(string text)
 template <typename T = string>
 void input(string text, T &data, bool clear = false, bool ignore = false)
 {
-    cout << text;
-    getline(cin, data);
 
     if (clear)
-
         cin.clear();
-
     if (ignore)
         cin.ignore();
+    cout << text;
+    getline(cin, data);
 }
 
 void enter(int size)

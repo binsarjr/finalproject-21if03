@@ -75,7 +75,8 @@ namespace HitungIPKRepository
         {
             return false;
         }
-        fout << hitungipk.npm << SEPARATOR << hitungipk.namaMahasiswa << SEPARATOR << hitungipk.kelas << SEPARATOR << hitungipk.nilai << SEPARATOR << hitungipk.totalSks << SEPARATOR << hitungipk.ipk << "\n";
+        fout << hitungipk.npm << SEPARATOR << hitungipk.namaMahasiswa << SEPARATOR << hitungipk.kelas << SEPARATOR << hitungipk.nilai << SEPARATOR << hitungipk.totalSks << SEPARATOR << setiosflags(ios::fixed)
+             << setprecision(2) << hitungipk.ipk << "\n";
         fout.close();
         return true;
     }
