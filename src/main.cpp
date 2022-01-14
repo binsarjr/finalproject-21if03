@@ -26,6 +26,8 @@
 #include <iomanip>
 #include <limits>
 
+using namespace std;
+
 #include <../lib/VariadicTable.h>
 #include <../lib/files.h>
 #include <../lib/string.h>
@@ -40,7 +42,6 @@
 #include <../include/services/mataKuliah.h>
 #include <../include/services/hitungipk.h>
 #include <../include/infrastructure/menu.h>
-using namespace std;
 
 int main()
 {
@@ -48,72 +49,5 @@ int main()
     kotakPrinting("SELAMAT DATANG DI APLIKASI AMIKOM");
     enter(3);
     Menu::display();
-    return 0;
+    return EXIT_SUCCESS;
 }
-
-// #include <iostream>
-// #include <iomanip>
-
-// using namespace std;
-
-// /**
-//  * @brief Fungsi untuk menentukan nilai yang didapatkan berdasarkan sks dan keterangan
-//  *
-//  * @param ket
-//  * @param sks
-//  * @return int
-//  */
-// int Nilai(char ket, float sks);
-// /**
-//  * @brief Fungsi program untuk menampilkan hasil
-//  *
-//  * @param nilai
-//  * @param tsks
-//  * @param ipk
-//  */
-// void PrintHasil(int nilai, float tsks, float ipk);
-// /**
-//  * @brief Cek valid range A-E atau a-e
-//  *
-//  * @param ket
-//  * @return true
-//  * @return false
-//  */
-// bool validRange(char ket);
-
-// int main()
-// {
-//     int n, nilai = 0;
-//     float ipk, sks, tsks;
-//     char ket;
-//     string matkul;
-//     cout << "Input banyak mata kuliah = ";
-//     cin >> n;
-
-//     for (int i = 1; i <= n; i++)
-//     {
-//         cin.ignore(256, '\n');
-//         cout << "\n\nData ke = " << i;
-//         cout << "\n-----------------\n";
-//         cout << "Mata kuliah = ";
-//         getline(cin, matkul, '\n');
-//         cout << "Jumlah SKS  = ";
-//         cin >> sks;
-//         cout << "Nilai huruf = ";
-//         cin >> ket;
-
-//         if (!validRange(ket))
-//         {
-//             cout << "Range nilai hanya dari A-E";
-//             return 0;
-//         }#include <limits>
-//         nilai += Nilai(ket, sks);
-//         tsks += sks;
-//         ipk = nilai / tsks;
-//     }
-//     cout << "\n\n";
-//     PrintHasil(nilai, tsks, ipk);
-
-//     cin.get();
-//     return 0;
-// }
